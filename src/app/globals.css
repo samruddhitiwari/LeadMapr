@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FAFAFA;
+  --foreground: #0A0A0A;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0A0A0A;
+    --foreground: #FAFAFA;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Neo-Brutalist Utilities */
+@layer components {
+  .btn-brutal {
+    @apply px-6 py-3 font-bold border-3 border-brutal-black bg-brutal-yellow text-brutal-black shadow-brutal transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-brutal-hover active:translate-x-[4px] active:translate-y-[4px] active:shadow-none;
+  }
+
+  .btn-brutal-pink {
+    @apply px-6 py-3 font-bold border-3 border-brutal-black bg-brutal-pink text-brutal-black shadow-brutal transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-brutal-hover;
+  }
+
+  .btn-brutal-blue {
+    @apply px-6 py-3 font-bold border-3 border-brutal-black bg-brutal-blue text-brutal-black shadow-brutal transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-brutal-hover;
+  }
+
+  .card-brutal {
+    @apply p-6 border-3 border-brutal-black bg-white shadow-brutal;
+  }
+
+  .card-brutal-yellow {
+    @apply p-6 border-3 border-brutal-black bg-brutal-yellow shadow-brutal;
+  }
+
+  .input-brutal {
+    @apply px-4 py-3 border-3 border-brutal-black bg-white text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brutal-yellow focus:ring-offset-2;
+  }
+
+  .select-brutal {
+    @apply px-2 py-1 border-2 border-brutal-black bg-white text-black focus:outline-none focus:ring-2 focus:ring-brutal-yellow;
+  }
+
+  /* Ensure all inputs and selects have visible text */
+  input,
+  select,
+  textarea {
+    color: black;
+  }
+}
+
+/* Brutal animations */
+@keyframes bounce-brutal {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-bounce-brutal {
+  animation: bounce-brutal 0.5s ease-in-out infinite;
+}
