@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { PLAN_LIMITS, PLAN_PRICES, SubscriptionTier } from '@/types/lead';
@@ -12,7 +12,7 @@ interface UsageData {
     remaining: number;
 }
 
-export default function BillingPage() {
+function BillingContent() {
     const searchParams = useSearchParams();
     const success = searchParams.get('success');
     const cancelled = searchParams.get('cancelled');
@@ -126,8 +126,8 @@ export default function BillingPage() {
                             <div
                                 key={plan.id}
                                 className={`border-4 border-brutal-black p-6 ${isCurrentPlan
-                                        ? 'bg-brutal-yellow shadow-brutal-xl ring-4 ring-brutal-black ring-offset-2'
-                                        : 'bg-white shadow-brutal'
+                                    ? 'bg-brutal-yellow shadow-brutal-xl ring-4 ring-brutal-black ring-offset-2'
+                                    : 'bg-white shadow-brutal'
                                     }`}
                             >
                                 <div className="flex justify-between items-start mb-4">
@@ -205,5 +205,17 @@ export default function BillingPage() {
                 </p>
             </main>
         </div>
+    );
+}
+
+export default function BillingPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+                <div className="text-xl font-bold">Loading...</div>
+            </div>
+        }>
+            <BillingContent />
+        </Suspense>
     );
 }
