@@ -93,8 +93,9 @@ export async function POST(request: NextRequest) {
         // Increment usage
         await incrementUsage(session.user.id, leads.length);
 
-        // Return file
-        return new NextResponse(content, {
+        // Return file - convert Buffer to Uint8Array for NextResponse compatibility
+        const responseBody = typeof content === 'string' ? content : new Uint8Array(content);
+        return new NextResponse(responseBody, {
             headers: {
                 'Content-Type': contentType,
                 'Content-Disposition': `attachment; filename="${filename}"`,
